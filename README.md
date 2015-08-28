@@ -2,8 +2,35 @@
 HOW TO USE:
 You can view the TZSUSD rate on this link http://ongeza.wenyeji.com/fronty/
 The end point providing data for the graph is http://ongeza.wenyeji.com/api/rates
+GET THE API DATA FOR THE PAST ONE MONTH
+_______________________________________
+The api has been built using yii framework,the developer must be having an understanding of how the yii framework works
+1.Download TZSUSD exchange rate for the past 30 days in CSV format on the site below:
+https://www.quandl.com/data/CURRFX/USDTZS-Currency-Exchange-Rates-USD-vs-TZS
+2.create api controller
+3.create a rates action method and insert the following code
+      
+      
+        $file_name='CURRFX-USDTZS.csv';
+        foreach (file($file_name) as $row) {
+            $rower=  explode(',', $row);
+            $y=  date('Y',  strtotime($rower[0]));
+            $m=  date('m',  strtotime($rower[0]));
+            $d=  date('d',  strtotime($rower[0]));
+            $date="new Date(".$y.",".$m.",".$d.")";
+            $date= trim($date);
+            $data[]=array(
+                $y,$m,$d,intval($rower[1]),  intval($rower[2]),  intval(str_replace("\n",'',$rower[3]))
+            );
+            
+        }
+        //remove the column names in the data
+        array_shift($data);
+        print_r(json_encode($data));
+
+
+
 SERVER SET UP USING  APACHE2
-================================
 1.create a ongeza.wenyeji.com.conf in /etc/apache2/sites-available
 The contents should be as follows
 <VirtualHost *:80>
@@ -62,31 +89,4 @@ The contents should be as follows
 4. in the /etc folder,add the following line in the hosts file
 127.0.1.1       ongeza.wenyeji.com
 5.restart apache2 server using the following command:  sudo service apache2 restart
-
-GET THE API DATA FOR THE PAST ONE MONTH
-===========================================
-The api has been built using yii framework,the developer must be having an understanding of how the yii framework works
-1.Download TZSUSD exchange rate for the past 30 days in CSV format on the site below:
-https://www.quandl.com/data/CURRFX/USDTZS-Currency-Exchange-Rates-USD-vs-TZS
-2.create api controller
-3.create a rates action method and insert the following code
-      
-      
-        $file_name='CURRFX-USDTZS.csv';
-        foreach (file($file_name) as $row) {
-            $rower=  explode(',', $row);
-            $y=  date('Y',  strtotime($rower[0]));
-            $m=  date('m',  strtotime($rower[0]));
-            $d=  date('d',  strtotime($rower[0]));
-            $date="new Date(".$y.",".$m.",".$d.")";
-            $date= trim($date);
-            $data[]=array(
-                $y,$m,$d,intval($rower[1]),  intval($rower[2]),  intval(str_replace("\n",'',$rower[3]))
-            );
-            
-        }
-        //remove the column names in the data
-        array_shift($data);
-        print_r(json_encode($data));
-
 
