@@ -20,16 +20,16 @@ This is the client consuming the json api and visualizing the data.
 The location of the client source code is /ongeza_rate/web/fronty.
 It has a method by th game getRate which receives TZSUSD rates data in json format using curl and then 			decodes them.
 The code used is as below.
-				function getRate()
-				{
-				$url = "http://ongeza.wenyeji.com/api/rates";
-				$ch = curl_init();
-				curl_setopt($ch, CURLOPT_URL, $url);
-				curl_setopt($ch, CURLOPT_RETURNTRANSFER, 1);
-				$data = curl_exec($ch);
-				curl_close($ch);
-				return $data;    
-				}
+	function getRate()
+		{
+		$url = "http://ongeza.wenyeji.com/api/rates";
+         	$ch = curl_init();
+		curl_setopt($ch, CURLOPT_URL, $url);
+		curl_setopt($ch, CURLOPT_RETURNTRANSFER, 1);
+		$data = curl_exec($ch);
+		curl_close($ch);
+		return $data;    
+		}
 
 GET THE API DATA FOR THE PAST ONE MONTH
 ----------------------------------------
