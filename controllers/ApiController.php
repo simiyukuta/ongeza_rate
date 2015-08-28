@@ -74,6 +74,7 @@ class ApiController extends Controller
             );
             
         }
+        //remove the column names in the data
         array_shift($data);
         print_r(json_encode($data));
     }

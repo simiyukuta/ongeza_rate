@@ -5,7 +5,17 @@ function getRates()
     $filename='http://ongeza.wenyeji.com/api/rates';
     return  file_get_contents($filename);
 }
-$data= json_decode(getRates());
+function getRate()
+{
+$url = "http://ongeza.wenyeji.com/api/rates";
+$ch = curl_init();
+curl_setopt($ch, CURLOPT_URL, $url);
+curl_setopt($ch, CURLOPT_RETURNTRANSFER, 1);
+$data = curl_exec($ch);
+curl_close($ch);
+return $data;    
+}
+$data= json_decode(getRate());
 
 
 
