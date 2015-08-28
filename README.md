@@ -1,4 +1,9 @@
-#CREATE THE SITE ON APACHE2
+
+HOW TO USE:
+You can view the TZSUSD rate on this link http://ongeza.wenyeji.com/fronty/
+The end point providing data for the graph is http://ongeza.wenyeji.com/api/rates
+SERVER SET UP USING  APACHE2
+================================
 1.create a ongeza.wenyeji.com.conf in /etc/apache2/sites-available
 The contents should be as follows
 <VirtualHost *:80>
@@ -58,12 +63,15 @@ The contents should be as follows
 127.0.1.1       ongeza.wenyeji.com
 5.restart apache2 server using the following command:  sudo service apache2 restart
 
-#GET THE API DATA FOR THE PAST ONE MONTH
-#The api has been built using yii framework,the developer must be having an understanding of how the yii framework works
+GET THE API DATA FOR THE PAST ONE MONTH
+===========================================
+The api has been built using yii framework,the developer must be having an understanding of how the yii framework works
 1.Download TZSUSD exchange rate for the past 30 days in CSV format on the site below:
 https://www.quandl.com/data/CURRFX/USDTZS-Currency-Exchange-Rates-USD-vs-TZS
 2.create api controller
 3.create a rates action method and insert the following code
+      
+      
         $file_name='CURRFX-USDTZS.csv';
         foreach (file($file_name) as $row) {
             $rower=  explode(',', $row);
@@ -82,4 +90,3 @@ https://www.quandl.com/data/CURRFX/USDTZS-Currency-Exchange-Rates-USD-vs-TZS
         print_r(json_encode($data));
 
 
-# ongeza_rate
