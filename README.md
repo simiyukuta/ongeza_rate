@@ -3,27 +3,29 @@ VISUALISING TZSUSD RATE  USING GOOGLE CHARTS
 --------------------------------------------
 HOW TO USE:
 ----------
-You can view the TZSUSD rate demo site on this link http://ongeza.wenyeji.com/fronty/
-The end point providing data for the graph is http://ongeza.wenyeji.com/api/rates
+- You can view the TZSUSD rate demo site on this link http://ongeza.wenyeji.com/fronty/
+- The end point providing data for the graph is http://ongeza.wenyeji.com/api/rates
 
 APPLICATION STRUCTURE
 ----------------------
 This application is divided into two components:
 Server 
 -------
-This is the api providing us the the data in json format.
+- This is the api providing us the the data in json format.
 Components are the normally the business layer,the repos and the models.
-The api has been built using yii framework,therefore the developer must be having a working understanding 	of  the yii framework
+- The api has been built using yii framework,therefore the developer must be having a working understanding 	of  the yii framework
 Client
 --------
-This is the client consuming the json api and visualizing the data.
-The location of the client source code is /ongeza_rate/web/fronty.
-It has a method by th game getRate which receives TZSUSD rates data in json format using curl and then 			decodes them.
-The code used is as below.
-	function getRate()
+- This is the client consuming the json api and visualizing the data.
+- The location of the client source code is /ongeza_rate/web/fronty.
+- It has a method by th game getRate which receives TZSUSD rates data in json format using curl and then 			decodes them.
+- The code used is as below.
+
+
+		function getRate()
 		{
 		$url = "http://ongeza.wenyeji.com/api/rates";
-         	$ch = curl_init();
+		$ch = curl_init();
 		curl_setopt($ch, CURLOPT_URL, $url);
 		curl_setopt($ch, CURLOPT_RETURNTRANSFER, 1);
 		$data = curl_exec($ch);
@@ -34,10 +36,10 @@ The code used is as below.
 GET THE API DATA FOR THE PAST ONE MONTH
 ----------------------------------------
 
--Download TZSUSD exchange rate for the past 30 days in CSV format on the site below:
+- Download TZSUSD exchange rate for the past 30 days in CSV format on the site below:
 https://www.quandl.com/data/CURRFX/USDTZS-Currency-Exchange-Rates-USD-vs-TZS
-	-create api controller
-	-create a rates action method and insert the following code
+- Create api controller
+- create a rates action method and insert the following code
       
       
         $file_name='CURRFX-USDTZS.csv';
@@ -61,18 +63,9 @@ https://www.quandl.com/data/CURRFX/USDTZS-Currency-Exchange-Rates-USD-vs-TZS
 
 SERVER SET UP USING  APACHE2
 ------------------------------
--create a ongeza.wenyeji.com.conf in /etc/apache2/sites-available
-The contents should be as follows
-	<VirtualHost *:80>
-		# The ServerName directive sets the request scheme, hostname and port that
-		# the server uses to identify itself. This is used when creating
-		# redirection URLs. In the context of virtual hosts, the ServerName
-		# specifies what hostname must appear in the request's Host: header to
-		# match this virtual host. For the default virtual host (this file) this
-		# value is not decisive as it is used as a last resort host regardless.
-		# However, you must set it for any further virtual host explicitly.
-		#ServerName www.example.com
-	
+- Create a ongeza.wenyeji.com.conf in /etc/apache2/sites-available.
+- The contents should be as follows
+		<VirtualHost *:80>
 		ServerName ongeza.wenyeji.com
 		ServerAlias www.wenyeji.com
 		ServerAdmin webmaster@localhost
@@ -114,8 +107,8 @@ The contents should be as follows
 	</VirtualHost>
 
 
--enable the site on apache using the following command: sudo  a2ensite ongeza.wenyeji.com.conf 
--Reload apache2 using the command sudo  service apache2 reload
+- enable the site on apache using the following command: sudo  a2ensite ongeza.wenyeji.com.conf 
+- Reload apache2 using the command sudo  service apache2 reload
 - in the /etc folder,add the following line in the hosts file
 127.0.1.1       ongeza.wenyeji.com
 -restart apache2 server using the following command:  sudo service apache2 restart
