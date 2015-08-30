@@ -14,6 +14,7 @@ Server
 - This is the api providing us the the data in json format.
 Components are the normally the business layer,the repos and the models.
 - The api has been built using yii framework,therefore the developer must be having a working understanding 	of  the yii framework
+
 Client
 --------
 - This is the client consuming the json api and visualizing the data.
@@ -65,17 +66,12 @@ SERVER SET UP USING  APACHE2
 ------------------------------
 - Create a ongeza.wenyeji.com.conf in /etc/apache2/sites-available.
 - The contents should be as follows
+
 		<VirtualHost *:80>
 		ServerName ongeza.wenyeji.com
 		ServerAlias www.wenyeji.com
 		ServerAdmin webmaster@localhost
 		DocumentRoot /srv/apps/ongeza_rate/web
-	
-		# Available loglevels: trace8, ..., trace1, debug, info, notice, warn,
-		# error, crit, alert, emerg.
-		# It is also possible to configure the loglevel for particular
-		# modules, e.g.
-		#LogLevel info ssl:warn
 	
 		ErrorLog ${APACHE_LOG_DIR}/error.log
 		CustomLog ${APACHE_LOG_DIR}/access.log combined
@@ -105,7 +101,6 @@ SERVER SET UP USING  APACHE2
 	        </Directory>
 	
 	</VirtualHost>
-
 
 - enable the site on apache using the following command: sudo  a2ensite ongeza.wenyeji.com.conf 
 - Reload apache2 using the command sudo  service apache2 reload
